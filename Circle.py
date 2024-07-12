@@ -2,13 +2,13 @@ import json
 import math
 
 import cv2
+from . import Shape
 
-import Shape
-import tracking
+from . import tracking
 
 
 class Circle(Shape.Shape):
-    def __init__(self, positions: list, color=(255, 0, 0), template=None):
+    def __init__(self, positions: list, color=(255, 0, 0), template=None, name:str="Circle"):
         self.positions = positions
         self.center = self.positions[0]
         self.radius = int(math.sqrt(
@@ -18,6 +18,7 @@ class Circle(Shape.Shape):
         self.template = template
 
         self.color = color
+        self.name = name
 
     def find_template(self, frame):
         cropped_image = frame[self.center[1]:self.positions[1][1],
@@ -26,8 +27,10 @@ class Circle(Shape.Shape):
         return cropped_image
 
     def save(self, name: str, frame):
-        cropped_image = frame[self.center[1]:self.positions[1][1],
-                              self.center[0]:self.positions[1][0]]
+        start = [self.center[0]-self.radius, self.center[1]-self.radius]
+        end = [self.center[0]+self.radius, self.center[1]+self.radius]
+        cropped_image = frame[start[1]:end[1],
+                              start[0]:end[0]]
         self.template = cropped_image
         cv2.imwrite(name, cropped_image)
 

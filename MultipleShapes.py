@@ -1,5 +1,5 @@
 from PIL import Image
-from transforms import RGBTransform
+from .transforms import RGBTransform
 import random
 
 import cv2
@@ -7,9 +7,9 @@ import mediapipe as mp
 import time
 import colorsys
 
-from Rectangle import Rectangle
-from Circle import Circle
-from Polygon import Polygon
+from .Rectangle import Rectangle
+from .Circle import Circle
+from .Polygon import Polygon
 
 cap = cv2.VideoCapture(0)
 mp_hands = mp.solutions.hands

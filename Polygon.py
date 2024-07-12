@@ -3,20 +3,21 @@ import json
 import cv2
 import numpy as np
 
-import Shape
-import tracking
+from . import Shape
+from . import tracking
 
 import shapely.geometry
 
 
 class Polygon(Shape.Shape):
-    def __init__(self, positions: list, color=(0, 0, 255), template=None):
+    def __init__(self, positions: list, color=(0, 0, 255), template=None, name:str="Polygon"):
         self.max_values = None
         self.min_values = None
         self.positions = positions
         self.shapely_positions = [(x[0], x[1]) for x in self.positions]
         self.color = color
         self.template = template
+        self.name = name
 
     def set_min_max(self):
         numpy_array = np.array(self.positions)

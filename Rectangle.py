@@ -2,16 +2,17 @@ import json
 
 import cv2
 
-import Shape
-import tracking
+from . import Shape
+from . import tracking
 
 
 class Rectangle(Shape.Shape):
-    def __init__(self, positions: list, color=(0, 0, 255), template=None):
+    def __init__(self, positions: list, color=(0, 0, 255), template=None, name:str="Rectangle"):
         self.positions = positions
         self.template = template
 
         self.color = color
+        self.name = name
 
     def find_template(self, frame):
         cropped_image = frame[self.positions[0][1]:self.positions[1][1],
